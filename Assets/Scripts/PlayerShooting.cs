@@ -35,7 +35,7 @@ public class PlayerShooting : MonoBehaviour
         if (bulletScript != null)
         {
             bulletScript.speed = bulletSpeed;
-            bulletScript.directionTransform = bulletSpawnPoint.transform;
+            // bulletScript.directionTransform = bulletSpawnPoint.transform;
         }
     }
 }

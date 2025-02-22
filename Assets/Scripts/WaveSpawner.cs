@@ -10,8 +10,9 @@ public class WaveSpawner : MonoBehaviour
     public float spawnRate;
     void Start()
     {
+        WavesManager.instance.AddWave(this);
         InvokeRepeating("Spawn", startTime, spawnRate);
-        Invoke("CancelInvoke", endTime);
+        Invoke("EndSpawner", endTime);
     }
 
     void Spawn()
@@ -21,7 +22,11 @@ public class WaveSpawner : MonoBehaviour
         if (enemyScript != null)
         {
             enemyScript.speed = 1f;
-            enemyScript.directionTransform = transform;
+            // enemyScript.directionTransform = transform;
         }
+    }
+    void EndSpawner() {
+        WavesManager.instance.RemoveWave(this);
+        CancelInvoke();
     }
 }

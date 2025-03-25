@@ -22,6 +22,7 @@ public class EnemyFSM : MonoBehaviour
     public float rotationSpeed = 5f;
     public float checkInterval = 0.1f;
     private float nextCheckTime = 0f;
+    public ParticleSystem muzzleFlash;
 
     void Start()
     {
@@ -150,6 +151,7 @@ public class EnemyFSM : MonoBehaviour
                 // bulletScript.directionTransform = sight.detectedObject?.transform;
             }
             lastShootTime = Time.time;
+            muzzleFlash.Play();
         }
     }
 

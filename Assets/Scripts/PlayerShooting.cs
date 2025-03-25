@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public GameObject bulletSpawnPoint;
     public float bulletSpeed = 10f;
+    public ParticleSystem muzzleFlash;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,14 +30,19 @@ public class PlayerShooting : MonoBehaviour
         // }
         
     }
-    public void OnFire()
+    public void OnFire(InputValue value)
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, transform.rotation);
-        BulletMovement bulletScript = bullet.GetComponent<BulletMovement>();
-        if (bulletScript != null)
+        if (value.isPressed)
         {
-            bulletScript.speed = bulletSpeed;
-            // bulletScript.directionTransform = bulletSpawnPoint.transform;
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, transform.rotation);
+            BulletMovement bulletScript = bullet.GetComponent<BulletMovement>();
+            if (bulletScript != null)
+            {
+                bulletScript.speed = bulletSpeed;
+                muzzleFlash.Play();
+                // bulletScript.directionTransform = bulletSpawnPoint.transform;
+            }
         }
+        
     }
 }

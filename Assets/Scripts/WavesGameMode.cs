@@ -25,8 +25,8 @@ public class WavesGameMode : MonoBehaviour
         SceneManager.LoadScene("LoseScene");
     }
     void Update() {
-        Debug.Log("Enemies: " + EnemyManager.instance.enemies.Count);
-        Debug.Log("Waves: " + WavesManager.instance.waves.Count);
+        // Debug.Log("Enemies: " + EnemyManager.instance.enemies.Count);
+        // Debug.Log("Waves: " + WavesManager.instance.waves.Count);
     }
 
     // Update is called once per frame

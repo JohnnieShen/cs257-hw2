@@ -11,6 +11,7 @@ public class PlayerBehavior : MonoBehaviour
     private float lookValue;
     private Rigidbody rb;
     public float health;
+    public float maxHealth;
     public UnityEvent onDeath;
     // Start is called before the first frame update
     
@@ -22,7 +23,7 @@ public class PlayerBehavior : MonoBehaviour
     }
     void Update()
     {
-        rb.AddRelativeForce(movementValue.x*Time.deltaTime, 0, movementValue.y*Time.deltaTime);
+        rb.AddRelativeForce(movementValue.x * Time.deltaTime, 0, movementValue.y * Time.deltaTime);
         rb.AddTorque(0, lookValue*Time.deltaTime, 0);
         if (health <= 0) {
             onDeath.Invoke();
@@ -30,11 +31,14 @@ public class PlayerBehavior : MonoBehaviour
     }
     public void OnMove(InputValue value)
     {
-        movementValue = -value.Get<Vector2>() * speed;
+        movementValue = value.Get<Vector2>() * speed;
     }
     public void OnLook(InputValue value)
     {
-        lookValue = value.Get<Vector2>().x * rotationSpeed;
+        Vector2 mouseInput = value.Get<Vector2>();
+        float rotationAmount = mouseInput.x * rotationSpeed * Time.deltaTime;
+        Quaternion deltaRotation = Quaternion.Euler(0, rotationAmount, 0);
+        rb.MoveRotation(rb.rotation * deltaRotation);
     }
 
     // Update is called once per frame

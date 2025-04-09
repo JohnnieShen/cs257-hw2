@@ -23,12 +23,12 @@ public class EnemyFSM : MonoBehaviour
     public float checkInterval = 0.1f;
     private float nextCheckTime = 0f;
     public ParticleSystem muzzleFlash;
-
+    Animator animator;
     void Start()
     {
         baseTransform = GameObject.Find("Base").transform;
         navMeshAgent = GetComponentInParent<NavMeshAgent>();
-        
+        animator = GetComponentInParent<Animator>();
         navMeshAgent.updateRotation = false;
     }
 
@@ -106,6 +106,7 @@ public class EnemyFSM : MonoBehaviour
 
     void GoToBase()
     {
+        animator.SetBool("Shooting", false);
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(baseTransform.position);
     }
@@ -119,6 +120,7 @@ public class EnemyFSM : MonoBehaviour
 
     void ChasePlayer()
     {
+        animator.SetBool("Shooting", false);
         if (sight.detectedObject == null)
             return;
 
@@ -140,8 +142,9 @@ public class EnemyFSM : MonoBehaviour
 
     void Shoot()
     {
+        animator.SetBool("Shooting", true);
         var timeSinceLastShot = Time.time - lastShootTime;
-        if (timeSinceLastShot > fireRate)
+        if (timeSinceLastShot > fireRate && Time.timeScale>0)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
             BulletMovement bulletScript = bullet.GetComponent<BulletMovement>();

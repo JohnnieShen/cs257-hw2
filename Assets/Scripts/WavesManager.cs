@@ -20,7 +20,7 @@ public class WavesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // Debug.Log("Waves: " + waves.Count);
     }
     public void AddWave(WaveSpawner wave) {
         waves.Add(wave);

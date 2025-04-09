@@ -393,7 +393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d7a900cd13a1a42a31db23e3af49dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlePrefab: {fileID: 0}
+  particlePrefab: {fileID: 1007127540951276732, guid: 17a9910901fde9b409e8ad4f0c2ac1da,
+    type: 3}
 --- !u!1001 &4292797632718863466
 PrefabInstance:
   m_ObjectHideFlags: 0
